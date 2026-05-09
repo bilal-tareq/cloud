@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+*.sqlite3
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# Docker
+.dockerignore
