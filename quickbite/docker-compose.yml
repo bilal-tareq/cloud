@@ -4,11 +4,27 @@ services:
     container_name: quickbite-backend
     volumes:
       - ./backend/db.sqlite3:/app/db.sqlite3
+    env_file:
+      - ./backend/.env
     environment:
       - DEBUG=0
       - ALLOWED_HOSTS=*
     expose:
       - "8000"
+
+  celery_worker:
+    build: ./backend
+    container_name: quickbite-celery-worker
+    command: celery -A quickbite worker -l info
+    volumes:
+      - ./backend/db.sqlite3:/app/db.sqlite3
+    env_file:
+      - ./backend/.env
+    environment:
+      - DEBUG=0
+      - ALLOWED_HOSTS=*
+    depends_on:
+      - backend
 
   frontend:
     build: ./frontend
