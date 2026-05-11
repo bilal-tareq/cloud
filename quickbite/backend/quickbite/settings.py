@@ -136,7 +136,8 @@ AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'eu-north-1')
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-AWS_QUERYSTRING_AUTH = True  # Enable signed URLs for private buckets
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+AWS_QUERYSTRING_AUTH = True
 AWS_S3_VERIFY = True
 
 # AWS SES Configuration (Email)
@@ -169,7 +170,7 @@ STORAGES = {
 }
 
 # Media files (Images) configuration
-MEDIA_URL = '/media/'  # django-storages will generate the full S3 URL automatically
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
