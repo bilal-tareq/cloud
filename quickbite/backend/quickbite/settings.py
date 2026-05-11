@@ -137,7 +137,7 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_ADDRESSING_STYLE = 'virtual'
-AWS_QUERYSTRING_AUTH = True
+AWS_QUERYSTRING_AUTH = False  # Use public URLs since bucket is public
 AWS_S3_VERIFY = True
 
 # AWS SES Configuration (Email)
