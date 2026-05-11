@@ -41,3 +41,13 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     http_method_names = ['get', 'post', 'head', 'options']
+
+    def perform_create(self, serializer):
+        # Save the order first
+        order = serializer.save()
+        
+        # Import task here to avoid circular imports if any
+        from api.tasks import send_order_confirmation_email
+        
+        # Trigger the background task to send the email
+        send_order_confirmation_email.delay(order.id)
